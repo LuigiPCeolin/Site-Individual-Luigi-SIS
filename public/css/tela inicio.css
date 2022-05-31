@@ -93,7 +93,7 @@ section.conteudo-tela-inicial{
     background-color: rgb(1, 68, 1);
     width: 250px;
     height: 3rem;
-    border-radius: 6rem;
+    border-radius: 10px;
     font-family: 'Sarala', sans-serif;
     font-size: 24px;
     color: rgb(255, 255, 255);
@@ -111,6 +111,7 @@ section.conteudo-tela-inicial{
     display: flex;
     flex-direction: column;
     background-color: rgba(57, 57, 57, 0.363);
+    
     
 }
 .rodape-conteudo {

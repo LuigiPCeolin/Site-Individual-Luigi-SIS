@@ -12,7 +12,10 @@ body{
 .titulo{
     font-size: 30px;
     display: flex;  
-    padding-left: 475px;
+    padding-left: 580px;
+    color: white
+    
+    
     
 }
 .timeline{
