@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilovt.css">
+    <link rel="shortcut icon" type="imagex/png" href="./assets/imgs/logo-palmeiras.png">
+    <title>Votação | Palmeiras</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Principal -->
+    <main id="p1" class="conteudo">
+        <section class="conteudo-principal">
+            <div><br>
+                <h1 class="conteudo-principal-escrito-titulo"> Quais desses títulos mais te marcou? </h1>
+            </div>
+
+            <div class="tudo">
+                <div class="conteudo-principal-caixa">
+                    <div class="caixa transicao">
+                        <label>
+                            <img class="conteudo-principal-imagem" src="../public/assets/imgs/liberta.png">
+                            <h2 class="conteudo-principal-titulo">Libertadores - 2020</h2>
+                            <input type="radio" id="liberta" name="linguagens" value="30">
+                        </label>
+                    </div>
+                    <div class="caixa transicao">
+                        <label>
+                            <img class="conteudo-principal-imagem" src="./assets/imgs/Brasileirão-2014.png">
+                            <h2 class="conteudo-principal-titulo">Brasileirão - 2016</h2>
+                            <input type="radio" id="brasileiro" name="linguagens" value="10">
+                        </label>
+                    </div>
+                    <div class="caixa transicao">
+                        <label>
+                            <img class="conteudo-principal-imagem" src="./assets/imgs/paulista.png">
+                            <h2 class="conteudo-principal-titulo">Paulista - 2022</h2>
+                            <input type="radio" id="paulista" name="linguagens" value="5">
+                        </label>
+                    </div>
+
+                    <div class="caixa transicao">
+                        <label>
+                            <img class="conteudo-principal-imagem" src="./assets/imgs/copinha.png">
+                            <h2 class="conteudo-principal-titulo">Copa do Brasil - 2015</h2>
+                            <input type="radio" id="copa" name="linguagens" value="17">
+                        </label>
+                    </div>
+                </div>
+                <div class="btn_voto">
+                    <button class="conteudo-principal-escrito-botao2 transicao2" onclick="confirmarVoto()">Confirmar
+                        Voto</button>
+                </div>
+
+        </section>
+
+
+
+        <section class="conteudo-principal3">
+
+            <canvas id="myChart" class="grafico" style="background-color:white;"></canvas>
+            <center>
+                <button class="conteudo-principal-escrito-botao3 transicao2" onclick="criar()">Atualizar
+                    Votação</button>
+            </center>
+        </section>
+
+
+    </main>
+    <!-- Rodapé -->
+
+</body>
+
+</html>
+
+<script>
+
+
+    var myChart = undefined
+    var libertaVar = Number(liberta.value)
+    var brasileiroVar = Number(brasileiro.value)
+    var paulistaVar = Number(paulista.value)
+    var copaVar = Number(copa.value)
+
+
+    var votos = [liberta]
+
+    const labels = [
+        'liberta',
+        'brasileiro',
+        'paulista',
+        'copa',
+
+    ];
+
+    var votos = [libertaVar, brasileiroVar, paulistaVar, copaVar]
+
+    function confirmarVoto() {
+
+        if (liberta.checked) {
+            votos[0] = votos[0] + 1
+        }
+        if (brasileiro.checked) {
+            votos[1] = votos[1] + 1
+        }
+        if (paulista.checked) {
+            votos[2] = votos[2] + 1
+        }
+        if (copa.checked) {
+            votos[3] = votos[3] + 1
+        }
+
+
+    }
+
+    function criar() {
+
+        console.log(votos)
+
+        if (myChart != undefined) {
+            myChart.destroy();
+        }
+
+        var data = {
+            labels: labels,
+            datasets: [{
+                label: 'Votação qual o título mais marcante para aos usuários',
+                backgroundColor: 'green',
+                borderColor: 'black',
+                data: votos,
+            }]
+        };
+
+        var config = {
+            type: 'bar',
+            data: data,
+            options: {}
+        };
+
+        myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    }
+
+    criar()
+
+</script>
+
+</html>
