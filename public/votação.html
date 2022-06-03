@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/estilovt.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilovt.css">
     <link rel="shortcut icon" type="imagex/png" href="./assets/imgs/logo-palmeiras.png">
     <title>Votação | Palmeiras</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
 </head>
 
-<body>
+<body onload="obterDadosGrafico(sessionStorage.ID_USUARIO)">
 
     <!-- Principal -->
     <main id="p1" class="conteudo">
@@ -22,38 +22,39 @@
 
             <div class="tudo">
                 <div class="conteudo-principal-caixa">
-                    <div class="caixa transicao">
+                    <div class="caixa-transicao">
                         <label>
-                            <img class="conteudo-principal-imagem" src="../public/assets/imgs/liberta.png">
+                            <img class="conteudo-principal-imagem" src="../assets/imgs/liberta.png">
                             <h2 class="conteudo-principal-titulo">Libertadores - 2020</h2>
-                            <input type="radio" id="liberta" name="linguagens" value="30">
+                            <input type="radio" id="liberta" name="linguagens" value="26">
                         </label>
                     </div>
-                    <div class="caixa transicao">
+                    <div class="caixa-transicao-dois">
                         <label>
-                            <img class="conteudo-principal-imagem" src="./assets/imgs/Brasileirão-2014.png">
+                            <img class="conteudo-principal-imagem-dois" src="./assets/imgs/Brasileirão-2014.png">
                             <h2 class="conteudo-principal-titulo">Brasileirão - 2016</h2>
                             <input type="radio" id="brasileiro" name="linguagens" value="10">
                         </label>
                     </div>
-                    <div class="caixa transicao">
+                    <div class="caixa-transicao-tres">
                         <label>
-                            <img class="conteudo-principal-imagem" src="./assets/imgs/paulista.png">
+                            <img class="conteudo-principal-imagem-tres" src="./assets/imgs/paulista.png">
                             <h2 class="conteudo-principal-titulo">Paulista - 2022</h2>
                             <input type="radio" id="paulista" name="linguagens" value="5">
                         </label>
                     </div>
 
-                    <div class="caixa transicao">
+                    <div class="caixa-transicao-quatro">
                         <label>
-                            <img class="conteudo-principal-imagem" src="./assets/imgs/copinha.png">
+                            <img class="conteudo-principal-imagem-quatro" src="./assets/imgs/copinha.png">
                             <h2 class="conteudo-principal-titulo">Copa do Brasil - 2015</h2>
                             <input type="radio" id="copa" name="linguagens" value="17">
                         </label>
                     </div>
                 </div>
+                </div>
                 <div class="btn_voto">
-                    <button class="conteudo-principal-escrito-botao2 transicao2" onclick="confirmarVoto()">Confirmar
+                    <button class="conteudo-principal-escrito-botao2" onclick="confirmarVoto()">Confirme seu
                         Voto</button>
                 </div>
 
@@ -63,9 +64,11 @@
 
         <section class="conteudo-principal3">
 
-            <canvas id="myChart" class="grafico" style="background-color:white;"></canvas>
+            <div class="grafico">
+                <canvas id="canvas_grafico" style="background-color:white ;"></canvas>
+            </div>
             <center>
-                <button class="conteudo-principal-escrito-botao3 transicao2" onclick="criar()">Atualizar
+                <button class="conteudo-principal-escrito-botao3" onclick="criar()">Atualizar
                     Votação</button>
             </center>
         </section>
@@ -74,6 +77,38 @@
     </main>
     <!-- Rodapé -->
 
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+
+            <div class="rodape-conteudo-sessao">
+                <p class="rodape-conteudo-titulo">Redes Sociais</p>
+                <div class="rodape-conteudo-barra"></div>
+                <a class="rodape-conteudo-ancora">Instagram</a>
+                <a class="rodape-conteudo-ancora">@luigipceolin<br>@fut_palmeiras</a>
+            </div>
+
+            <div class="rodape-conteudo-imagem">
+                <a href="index.html"><img class="rodape-imagem" src="./assets/imgs/logo-palmeiras.png"></a>
+                <p class="rodape-direito">© #MAIORCAMPEÃODOBRASIL | Palmeiras.</p>
+            </div>
+
+            <div class="rodape-conteudo-sessao">
+                <p class="rodape-conteudo-titulo">Endereço</p>
+                <div class="rodape-conteudo-barra"></div>
+                <p class="rodape-conteudo-ancora">
+                    São Paulo / SP <br>
+
+                    Rua Palestra Italia, 315<br>
+
+                    Pompéia <br>
+
+                    CEP 01464-005
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
 </body>
 
 </html>
@@ -81,74 +116,202 @@
 <script>
 
 
-    var myChart = undefined
-    var libertaVar = Number(liberta.value)
-    var brasileiroVar = Number(brasileiro.value)
-    var paulistaVar = Number(paulista.value)
-    var copaVar = Number(copa.value)
+     var myChart = undefined
+     var libertaVar = Number(liberta.value)
+     var brasileiroVar = Number(brasileiro.value)
+     var paulistaVar = Number(paulista.value)
+     var copaVar = Number(copa.value)
 
 
-    var votos = [liberta]
+     var votos = [liberta]
 
-    const labels = [
+     const labels = [
         'liberta',
         'brasileiro',
         'paulista',
-        'copa',
+         'copa',
 
-    ];
+     ];
 
-    var votos = [libertaVar, brasileiroVar, paulistaVar, copaVar]
+    // var fkVotos;
 
-    function confirmarVoto() {
+    // function confirmarVoto() {
 
+    //     if (liberta.checked) {
+    //         fkVotos = 1
+    //     }
+    //     if (brasileiro.checked) {
+    //         fkVotos = 2
+    //     }
+    //     if (paulista.checked) {
+    //         fkVotos = 3
+    //     }
+    //     if (copa.checked) {
+    //         fkVotos = 4
+    //     }
+
+
+    // }
+
+    function obterDadosGrafico(idUsuario) {
+
+        fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta) {
+        console.log('iniciando plotagem do gráfico...');
+
+        var dados = {
+            labels: [],
+            datasets: [
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Votação qual o título mais marcante para aos usuários',
+                    borderColor: 'black',
+                    backgroundColor: 'green',
+                    fill: true,
+                    data: []
+                }
+            ]
+        };
+
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            dados.labels.push(registro.Titulos);
+            dados.datasets[0].data.push(registro.qtd);
+        }
+
+        console.log(JSON.stringify(dados));
+
+        var ctx = canvas_grafico.getContext('2d');
+        window.grafico_linha = Chart.Bar(ctx, {
+            data: dados,
+            options: {
+                responsive: true,
+                animation: { duration: 500 },
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                    display: false,
+                    text: 'Dados capturados'
+                },
+                scales: {
+                    yAxes: [ {
+                        type: 'linear',
+                        display: false,
+                        position: 'right',
+                        id: 'y-umidade',
+                        ticks: {
+                            beginAtZero: true,
+                            max: 100,
+                            min: 0
+                        },
+
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                    }],
+                }
+            }
+        });
+
+    }
+
+
+    // function criar() {
+
+    //     console.log(votos)
+
+    //     if (myChart != undefined) {
+    //         myChart.destroy();
+    //     }
+
+    //     var data = {
+    //         labels: labels,
+    //         datasets: [{
+    //             label: 'Votação qual o título mais marcante para aos usuários',
+    //             backgroundColor: 'green',
+    //             borderColor: 'black',
+    //             data: votos,
+    //         }]
+    //     };
+
+    //     var config = {
+    //         type: 'bar',
+    //         data: data,
+    //         options: {}
+    //     };
+
+    //     myChart = new Chart(
+    //         document.getElementById('myChart'),
+    //         config
+    //     );
+    // }
+
+    // criar()
+
+
+    function confirmarVoto(){
+        
         if (liberta.checked) {
-            votos[0] = votos[0] + 1
+            votacaoVar = 1
         }
         if (brasileiro.checked) {
-            votos[1] = votos[1] + 1
+            votacaoVar = 2
         }
         if (paulista.checked) {
-            votos[2] = votos[2] + 1
+            votacaoVar = 3
         }
         if (copa.checked) {
-            votos[3] = votos[3] + 1
+            votacaoVar = 4
         }
 
+        idVar = sessionStorage.ID_USUARIO;
+        // Enviando o valor da nova input
+        fetch("/usuarios/confirmarVoto", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que receba o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                votacaoServer: votacaoVar,
+                idServer: idVar
+            })
+        }).then(function (resposta) {
 
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
+                console.log("O cadastro deu certo")
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro")
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+        return false;
     }
 
-    function criar() {
-
-        console.log(votos)
-
-        if (myChart != undefined) {
-            myChart.destroy();
-        }
-
-        var data = {
-            labels: labels,
-            datasets: [{
-                label: 'Votação qual o título mais marcante para aos usuários',
-                backgroundColor: 'green',
-                borderColor: 'black',
-                data: votos,
-            }]
-        };
-
-        var config = {
-            type: 'bar',
-            data: data,
-            options: {}
-        };
-
-        myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
-    }
-
-    criar()
 
 </script>
 

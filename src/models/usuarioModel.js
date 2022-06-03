@@ -27,8 +27,19 @@ function cadastrar(nome, email, cpf, senha) {
     return database.executar(instrucao);
 }
 
+
+
+function confirmarVoto(votacao,id) {
+    var instrucao = `
+    INSERT INTO VotosTitulos VALUES ('${id}','${votacao}');
+    `;
+    console.log("Executando a instrução SQL : \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
+    confirmarVoto
 };

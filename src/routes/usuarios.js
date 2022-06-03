@@ -19,4 +19,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });
 
+router.post("/confirmarVoto", function (req, res) {
+    usuarioController.confirmarVoto(req, res);
+})
+
 module.exports = router;

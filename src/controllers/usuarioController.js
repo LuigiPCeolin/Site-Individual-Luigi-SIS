@@ -95,9 +95,42 @@ function cadastrar(req, res) {
     }
 }
 
+function confirmarVoto (req, res) {
+    var votacao = req.body.votacaoServer
+    var id = req.body.idServer
+
+    if (votacao == undefined) {
+        res.status(400).send("Seu voto está undefined!");
+    } else if (id == undefined){
+        res.status(400).send("Seu id está undefined!");
+    }
+
+    else{
+        
+        usuarioModel.confirmarVoto(votacao,id)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+            
+    }
+}
+
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    confirmarVoto
 }
