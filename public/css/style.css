@@ -138,6 +138,11 @@ body {
   align-items: center;
   border-radius: 16px;
   margin-bottom: 30px;
+  
+}
+.titulo_login{
+  color: white;
+  font-style: italic;
 }
 
 .card {
@@ -209,6 +214,7 @@ input {
   padding: 10px;
   text-align: center;
   border-radius: 10px;
+
 }
 
 .btn {

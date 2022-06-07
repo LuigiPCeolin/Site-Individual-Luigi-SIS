@@ -52,11 +52,11 @@
                         </label>
                     </div>
                 </div>
-                </div>
-                <div class="btn_voto">
-                    <button class="conteudo-principal-escrito-botao2" onclick="confirmarVoto()">Confirme seu
-                        Voto</button>
-                </div>
+            </div>
+            <div class="btn_voto">
+                <button class="conteudo-principal-escrito-botao2" onclick="confirmarVoto()">Confirme seu
+                    Voto</button>
+            </div>
 
         </section>
 
@@ -68,8 +68,7 @@
                 <canvas id="canvas_grafico" style="background-color:white ;"></canvas>
             </div>
             <center>
-                <button class="conteudo-principal-escrito-botao3" onclick="criar()">Atualizar
-                    Votação</button>
+                <a href="index.html"><button class="conteudo-principal-escrito-botao3" onclick="criar()">Sair</button></a>
             </center>
         </section>
 
@@ -116,42 +115,24 @@
 <script>
 
 
-     var myChart = undefined
-     var libertaVar = Number(liberta.value)
-     var brasileiroVar = Number(brasileiro.value)
-     var paulistaVar = Number(paulista.value)
-     var copaVar = Number(copa.value)
+    var myChart = undefined
+    var libertaVar = Number(liberta.value)
+    var brasileiroVar = Number(brasileiro.value)
+    var paulistaVar = Number(paulista.value)
+    var copaVar = Number(copa.value)
 
 
-     var votos = [liberta]
+    var votos = [liberta]
 
-     const labels = [
+    const labels = [
         'liberta',
         'brasileiro',
         'paulista',
-         'copa',
+        'copa',
 
-     ];
-
-    // var fkVotos;
-
-    // function confirmarVoto() {
-
-    //     if (liberta.checked) {
-    //         fkVotos = 1
-    //     }
-    //     if (brasileiro.checked) {
-    //         fkVotos = 2
-    //     }
-    //     if (paulista.checked) {
-    //         fkVotos = 3
-    //     }
-    //     if (copa.checked) {
-    //         fkVotos = 4
-    //     }
+    ];
 
 
-    // }
 
     function obterDadosGrafico(idUsuario) {
 
@@ -213,7 +194,7 @@
                     text: 'Dados capturados'
                 },
                 scales: {
-                    yAxes: [ {
+                    yAxes: [{
                         type: 'linear',
                         display: false,
                         position: 'right',
@@ -235,8 +216,8 @@
     }
 
 
-    function confirmarVoto(){
-        
+    function confirmarVoto() {
+
         if (liberta.checked) {
             votacaoVar = 1
         }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como seria seu jogador</title>
+
+    <link rel="stylesheet" href="../public/css/sorteio.css">
+</head>
+
+<body>
+    <div class="titulo">
+        <h1>Montando seu Jogador</h1>
+    </div>
+    <div class="conteudo-select">
+        <h2>1º passo: Selecione sua posição abaixo</h2>
+
+        <select id="sel_posicao" class="posicao">
+            <option value="">-- Escolha sua posição --</option>
+            <option value="Gol">Gol</option>
+            <option value="LD">LD</option>
+            <option value="LE">LE</option>
+            <option value="Def">Def</option>
+            <option value="vol">vol</option>
+            <option value="Mc">Mc</option>
+            <option value="Mei">Mei</option>
+            <option value="PD">PD</option>
+            <option value="Ata">Ata</option>
+            <option value="PE">PE</option>
+        </select>
+    </div>
+    <div class="conteudo-botao">
+        <h2>2º passo: Sorteie um número para sua camisa, clicando no botão abaixo</h2>
+        <div class="box">
+            <h1></h1>
+            <button onclick="sorteio()">Sortear número</button>
+        </div>
+    </div>
+
+   <a href="index.html"><button class="sair" onclick="sair()">Concluir Montagem de Jogador e Sair</button></a>
+
+
+</body>
+</html>
+<script>
+
+    function sorteio() {
+        var posicao = sel_posicao.value
+        var numeroSorteado = document.querySelector("div.box h1")
+
+        if(posicao == ''){
+            alert("Informar uma posição por gentileza")
+        } else{
+
+        var roleta = []
+
+        for (i = 0; i <= 99; i++) {
+            roleta.push(i)
+
+            numeroSorteado.innerHTML = ` Seu jogador ficou com as seguintes informações:<br> Posição = ${posicao}<br> Número da camisa ficou = ` + roleta[Math.floor(Math.random() * roleta.length)]
+
+        }
+    }
+    }
+</script>
